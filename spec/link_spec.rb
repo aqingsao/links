@@ -12,15 +12,15 @@ describe Link do
       expect(link.node1).not_to eq(link.node2)
     end
   end
-  describe 'all_connected' do 
+  describe 'all_linked' do 
     it "should return true" do
       links = Links.new([@node1, @node2]);
       links << Link.new(@node1, @node2)
-      expect(links.all_connected).to be(true)
+      expect(links.all_linked).to be(true)
     end
     it "should return false" do
       links = Links.new([@node1, @node2]);
-      expect(links.all_connected).to be(false)
+      expect(links.all_linked).to be(false)
     end
   end
 end

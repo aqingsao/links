@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), "link.rb")
 
-link_factor = 1.5
+link_factor = 1
 node_count = 1000
 
 nodes = node_count.times.each_with_object([]) do |i, nodes|
@@ -14,9 +14,11 @@ end
 p "nodes: #{nodes.length}, links: #{links.length}"
 links.print_summary
 
-while(not links.all_connected) do
+begin
   link = Link.randomLink(nodes) while link.nil? || links.include?(link)
   links << link
-end
+  links.print_summary if(links.size % 100 == 0)
+end until links.all_linked
+
 p "nodes: #{nodes.length}, links: #{links.length}"
 links.print_summary

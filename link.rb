@@ -36,6 +36,13 @@ class Links < Array
     end
     p nodes_by_count
   end
+  def all_linked
+    connected_nodes = self.each_with_object([]) do |link, connected_nodes|
+      connected_nodes << link.node1 unless connected_nodes.include? link.node1
+      connected_nodes << link.node2 unless connected_nodes.include? link.node2
+    end
+    connected_nodes.size >= @nodes.size 
+  end
   def all_connected
     connected_nodes = self.each_with_object([]) do |link, connected_nodes|
       connected_nodes << link.node1 unless connected_nodes.include? link.node1
