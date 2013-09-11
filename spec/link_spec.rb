@@ -18,6 +18,9 @@ describe Link do
       links << Link.new(@node1, @node2)
       expect(links.all_connected).to be(true)
     end
-
+    it "should return false" do
+      links = Links.new([@node1, @node2]);
+      expect(links.all_connected).to be(false)
+    end
   end
 end
