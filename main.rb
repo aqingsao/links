@@ -1,3 +1,4 @@
+require File.join(File.dirname(__FILE__), "graph.rb")
 require File.join(File.dirname(__FILE__), "link.rb")
 
 link_factor = 1
@@ -15,10 +16,10 @@ p "nodes: #{nodes.length}, links: #{links.length}"
 links.print_summary
 
 begin
-  link = Link.randomLink(nodes) while link.nil? || links.include?(link)
-  links << link
-  links.print_summary if(links.size % 100 == 0)
+  ([nodes.size / 100, 1].max).to_i.times do |i|
+    link = Link.randomLink(nodes) while link.nil? || links.include?(link)
+    links << link
+  end
 end until links.all_linked
 
-p "nodes: #{nodes.length}, links: #{links.length}"
 links.print_summary
